@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grand Lux Hotel - 5-Star Luxury & Comfort</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="#home">The Grand Lux Hotel</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#rooms">Rooms</a></li>
+                <li><a href="#dining">Dining</a></li>
+                <li><a href="#amenities">Amenities</a></li>
+                <li><a href="#booking" class="btn btn-primary">Book Now</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="slider">
+                <div class="slide active">
+                    <img src="images/image 1.jpg" alt="Luxurious Hotel Lobby">
+                    <div class="hero-content">
+                        <h1>Experience Unrivaled Luxury</h1>
+                        <p>Your perfect escape awaits at The Grand Lux Hotel.</p>
+                        <a href="#booking" class="btn btn-secondary">Book Your Stay</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/image 2.jpg" alt="Elegant Suite Bedroom">
+                    <div class="hero-content">
+                        <h1>Sophisticated Comfort, Exquisite Design</h1>
+                        <p>Indulge in spacious rooms and breathtaking views.</p>
+                        <a href="#rooms" class="btn btn-secondary">View Rooms</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="https://www.freepik.com/free-photo/popular-resort-amara-dolce-vita-luxury-hotel-with-pools-water-parks-recreational-area-along-sea-coast-turkey-sunset-tekirova-kemer_10136800.htm#fromView=keyword&page=1&position=3&uuid=34987431-51d7-438e-b0d9-46f2b69aa5eb&query=Grand+Hotel/1920x1080/000000/AAAAAA?text=Infinity+Pool+with+View" alt="Infinity Pool with View">
+                    <div class="hero-content">
+                        <h1>Relax and Rejuvenate</h1>
+                        <p>Discover our world-class amenities and serene spa.</p>
+                        <a href="#amenities" class="btn btn-secondary">Explore Amenities</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+            </div>
+        </section>
+
+        <section id="booking" class="section-padding booking-section">
+            <div class="container">
+                <h2>Book Your Stay</h2>
+                <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="checkInDate">Check-in Date:</label>
+                        <input type="date" id="checkInDate" name="checkInDate" required>
+                        <p class="error-message" id="checkInDateError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkOutDate">Check-out Date:</label>
+                        <input type="date" id="checkOutDate" name="checkOutDate" required>
+                        <p class="error-message" id="checkOutDateError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="adults">Adults:</label>
+                        <input type="number" id="adults" name="adults" min="1" value="1" required>
+                        <p class="error-message" id="adultsError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Children:</label>
+                        <input type="number" id="children" name="children" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">Room Type:</label>
+                        <select id="roomType" name="roomType" required>
+                            <option value="">Select a Room Type</option>
+                            <option value="standard">Standard Room</option>
+                            <option value="deluxe">Deluxe Suite</option>
+                            <option value="executive">Executive Suite</option>
+                            <option value="presidential">Presidential Suite</option>
+                        </select>
+                        <p class="error-message" id="roomTypeError"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Check Availability</button>
+                    <div id="bookingConfirmation" class="confirmation-message hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <section id="rooms" class="section-padding">
+            <div class="container">
+                <h2>Our Luxurious Rooms & Suites</h2>
+                <div class="room-gallery">
+                    <article class="room-card">
+                        <img src="https://via.placeholder.com/600x400/D3D3D3/000000?text=Standard+Room" alt="Standard Room">
+                        <h3>Standard Room</h3>
+                        <p>Cozy and elegant, perfect for a comfortable stay.</p>
+                        <ul>
+                            <li><i class="fas fa-bed"></i> King Bed</li>
+                            <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+                            <li><i class="fas fa-utensils"></i> Breakfast Included</li>
+                        </ul>
+                        <span class="price">From KES 25,000 / Night</span>
+                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                    </article>
+                    <article class="room-card">
+                        <img src="https://via.placeholder.com/600x400/B0C4DE/000000?text=Deluxe+Suite" alt="Deluxe Suite">
+                        <h3>Deluxe Suite</h3>
+                        <p>Spacious and stylish, with a separate living area.</p>
+                        <ul>
+                            <li><i class="fas fa-bed"></i> Super King Bed</li>
+                            <li><i class="fas fa-couch"></i> Lounge Area</li>
+                            <li><i class="fas fa-bath"></i> Marble Bathroom</li>
+                        </ul>
+                        <span class="price">From KES 45,000 / Night</span>
+                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                    </article>
+                    <article class="room-card">
+                        <img src="https://via.placeholder.com/600x400/ADD8E6/000000?text=Executive+Suite" alt="Executive Suite">
+                        <h3>Executive Suite</h3>
+                        <p>Panoramic views and exclusive executive lounge access.</p>
+                        <ul>
+                            <li><i class="fas fa-bed"></i> California King</li>
+                            <li><i class="fas fa-mug-hot"></i> Coffee Machine</li>
+                            <li><i class="fas fa-user-tie"></i> Executive Perks</li>
+                        </ul>
+                        <span class="price">From KES 70,000 / Night</span>
+                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="dining" class="section-padding bg-light">
+            <div class="container">
+                <h2>Exquisite Dining Experiences</h2>
+                <p class="section-intro">Savor culinary masterpieces crafted by our award-winning chefs.</p>
+                <div class="dining-options">
+                    <article class="dining-card">
+                        <img src="https://via.placeholder.com/600x400/F0E68C/000000?text=Fine+Dining+Restaurant" alt="Fine Dining Restaurant">
+                        <h3>The Grand Bistro</h3>
+                        <p>A sophisticated ambiance serving contemporary international cuisine.</p>
+                    </article>
+                    <article class="dining-card">
+                        <img src="https://via.placeholder.com/600x400/DDA0DD/000000?text=Rooftop+Bar" alt="Rooftop Bar">
+                        <h3>Skyline Lounge</h3>
+                        <p>Enjoy handcrafted cocktails with panoramic city views from our rooftop bar.</p>
+                    </article>
+                    <article class="dining-card">
+                        <img src="https://via.placeholder.com/600x400/98FB98/000000?text=Cafe+Patisserie" alt="Cafe Patisserie">
+                        <h3>Patisserie Delights</h3>
+                        <p>Indulge in freshly baked pastries, artisanal coffee, and light snacks.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="amenities" class="section-padding">
+            <div class="container">
+                <h2>World-Class Amenities</h2>
+                <p class="section-intro">Elevate your stay with our premium facilities designed for your comfort and enjoyment.</p>
+                <div class="amenities-grid gallery">
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/87CEFA/000000?text=Spa+and+Wellness">
+                        <img src="https://via.placeholder.com/400x300/87CEFA/000000?text=Spa+and+Wellness" alt="Spa and Wellness Center">
+                        <p>Spa & Wellness Center</p>
+                    </div>
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/FFB6C1/000000?text=Fitness+Center">
+                        <img src="https://via.placeholder.com/400x300/FFB6C1/000000?text=Fitness+Center" alt="State-of-the-art Fitness Center">
+                        <p>Fitness Center</p>
+                    </div>
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/90EE90/000000?text=Swimming+Pool">
+                        <img src="https://via.placeholder.com/400x300/90EE90/000000?text=Swimming+Pool" alt="Outdoor Swimming Pool">
+                        <p>Outdoor Swimming Pool</p>
+                    </div>
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/DDA0DD/000000?text=Conference+Room">
+                        <img src="https://via.placeholder.com/400x300/DDA0DD/000000?text=Conference+Room" alt="Modern Conference Facilities">
+                        <p>Conference Facilities</p>
+                    </div>
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/F4A460/000000?text=Kids+Club">
+                        <img src="https://via.placeholder.com/400x300/F4A460/000000?text=Kids+Club" alt="Kids Club">
+                        <p>Kids Club</p>
+                    </div>
+                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/F0F8FF/000000?text=Concierge+Service">
+                        <img src="https://via.placeholder.com/400x300/F0F8FF/000000?text=Concierge+Service" alt="Dedicated Concierge Service">
+                        <p>24/7 Concierge Service</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section-padding bg-dark">
+            <div class="container">
+                <h2>What Our Guests Say</h2>
+                <div class="testimonials-slider">
+                    <div class="testimonial-card active">
+                        <p class="quote">"Absolutely magnificent! The service was impeccable, and the room was beyond luxurious. A truly unforgettable experience."</p>
+                        <p class="author">- Sarah L., USA</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="quote">"From the stunning lobby to the exquisite dining, The Grand Lux exceeded all expectations. Highly recommend!"</p>
+                        <p class="author">- David K., UK</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <p class="quote">"Every detail was perfect. The staff were incredibly attentive, and the amenities made our stay so relaxing. We will be back!"</p>
+                        <p class="author">- Aisha M., Kenya</p>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <span class="dot active" data-testimonial="0"></span>
+                    <span class="dot" data-testimonial="1"></span>
+                    <span class="dot" data-testimonial="2"></span>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <h2>Contact Us</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Reach Out</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Grand City, GL 12345</p>
+                        <p><i class="fas fa-phone-alt"></i> +254 714 564 789</p>
+                        <p><i class="fas fa-envelope"></i> info@grandluxhotel.com</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="newsletter-form">
+                        <h3>Subscribe to our Newsletter</h3>
+                        <p>Stay updated with our latest offers and news.</p>
+                        <form id="newsletterForm">
+                            <input type="email" placeholder="Your Email Address" required aria-label="Newsletter email">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                        <div id="newsletterConfirmation" class="confirmation-message hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 The Grand Lux Hotel. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
