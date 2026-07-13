@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — The Grand Lux Hotel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F6FA; color: #2F3E46;
+        }
+        .admin-header {
+            background: linear-gradient(135deg, #2F3E46, #1a2529);
+            color: white; padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .admin-header h1 { font-size: 1.6em; font-weight: 600; }
+        .admin-header h1 i { color: #E0C79A; margin-right: 8px; }
+        .admin-header a { color: #E0C79A; text-decoration: none; font-size: 0.9em; }
+        .admin-container { max-width: 1400px; margin: 30px auto; padding: 0 30px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; margin-bottom: 30px;
+        }
+        .stat-card {
+            background: white; padding: 25px; border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid #A38C6F;
+            transition: transform 0.2s;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        .stat-card.confirmed { border-left-color: #28a745; }
+        .stat-card.pending { border-left-color: #ffc107; }
+        .stat-card.cancelled { border-left-color: #dc3545; }
+        .stat-card.revenue { border-left-color: #00A651; }
+        .stat-card h3 {
+            color: #6B7280; font-size: 0.85em; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;
+        }
+        .stat-card .value { font-size: 2.2em; font-weight: 700; color: #2F3E46; }
+        .stat-card .subtitle { color: #9CA3AF; font-size: 0.85em; margin-top: 5px; }
+        .stat-card i { float: right; font-size: 1.8em; color: #A38C6F; opacity: 0.7; }
+
+        .tabs {
+            display: flex; gap: 10px; margin-bottom: 20px;
+            border-bottom: 2px solid #E5E7EB; padding-bottom: 0;
+        }
+        .tab {
+            padding: 12px 24px; border: none; background: none; cursor: pointer;
+            color: #6B7280; font-size: 1em; font-weight: 500;
+            border-bottom: 3px solid transparent; margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+        .tab.active { color: #A38C6F; border-bottom-color: #A38C6F; }
+        .tab:hover { color: #2F3E46; }
+
+        .panel { background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .panel-header {
+            padding: 20px 30px; border-bottom: 1px solid #E5E7EB;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .panel-header h2 { font-size: 1.2em; }
+        .panel-body { padding: 30px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left; padding: 12px 15px;
+            background: #F9FAFB; color: #6B7280;
+            font-size: 0.85em; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        td { padding: 15px; border-bottom: 1px solid #F3F4F6; font-size: 0.95em; }
+        tr:hover td { background: #FAFAFA; }
+        .status-badge {
+            display: inline-block; padding: 4px 12px; border-radius: 12px;
+            font-size: 0.8em; font-weight: 600; text-transform: uppercase;
+        }
+        .status-confirmed { background: #D1FAE5; color: #065F46; }
+        .status-pending { background: #FEF3C7; color: #92400E; }
+        .status-cancelled { background: #FEE2E2; color: #991B1B; }
+        .status-paid { background: #DBEAFE; color: #1E40AF; }
+        .status-unpaid { background: #F3F4F6; color: #4B5563; }
+        .status-processing { background: #FEF3C7; color: #92400E; }
+        .status-failed { background: #FEE2E2; color: #991B1B; }
+
+        .btn-action {
+            padding: 6px 12px; margin-right: 6px; border: none;
+            border-radius: 6px; cursor: pointer; font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .btn-confirm { background: #10B981; color: white; }
+        .btn-confirm:hover { background: #059669; }
+        .btn-cancel { background: #EF4444; color: white; }
+        .btn-cancel:hover { background: #DC2626; }
+        .btn-view { background: #6366F1; color: white; }
+        .btn-view:hover { background: #4F46E5; }
+
+        .search-bar {
+            padding: 10px 15px; border: 1px solid #E5E7EB;
+            border-radius: 8px; width: 300px; font-size: 0.95em;
+        }
+        .filter-select {
+            padding: 10px 15px; border: 1px solid #E5E7EB;
+            border-radius: 8px; font-size: 0.95em; margin-left: 10px;
+        }
+        .empty {
+            text-align: center; padding: 60px 20px;
+            color: #9CA3AF; font-size: 1.05em;
+        }
+        .empty i { font-size: 4em; margin-bottom: 15px; opacity: 0.3; display: block; }
+        .loading { text-align: center; padding: 40px; color: #6B7280; }
+
+        .chart-container {
+            background: white; padding: 25px; border-radius: 12px;
+            margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .chart-container h3 { margin-bottom: 20px; color: #374151; font-size: 1.05em; }
+        .bar-chart { display: flex; gap: 15px; align-items: flex-end; height: 200px; padding: 20px 0; }
+        .bar-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .bar {
+            width: 100%; max-width: 60px;
+            background: linear-gradient(180deg, #A38C6F, #8C7B5D);
+            border-radius: 6px 6px 0 0; transition: all 0.3s;
+            display: flex; align-items: flex-start; justify-content: center;
+            padding-top: 5px; color: white; font-size: 0.75em; font-weight: 600;
+        }
+        .bar:hover { opacity: 0.85; transform: scale(1.05); }
+        .bar-label { font-size: 0.8em; color: #6B7280; }
+
+        @media (max-width: 768px) {
+            .admin-container { padding: 0 15px; }
+            .search-bar { width: 100%; margin-bottom: 10px; }
+            table { font-size: 0.85em; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h1><i class="fas fa-crown"></i> Grand Lux Admin Dashboard</h1>
+        <a href="index.html"><i class="fas fa-arrow-left"></i> Back to Site</a>
+    </div>
+
+    <div class="admin-container">
+        <!-- Stats Overview -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="loading">Loading dashboard...</div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-container" id="chartContainer" style="display:none;">
+            <h3><i class="fas fa-chart-bar"></i> Bookings by Room Type</h3>
+            <div class="bar-chart" id="barChart"></div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="bookings"><i class="fas fa-calendar-check"></i> Bookings</button>
+            <button class="tab" data-tab="rooms"><i class="fas fa-bed"></i> Rooms</button>
+            <button class="tab" data-tab="contacts"><i class="fas fa-envelope"></i> Messages</button>
+        </div>
+
+        <!-- Panels -->
+        <div class="panel" id="panel">
+            <div class="panel-header">
+                <h2 id="panelTitle">All Bookings</h2>
+                <div>
+                    <input type="text" class="search-bar" id="searchInput" placeholder="Search...">
+                    <select class="filter-select" id="filterSelect">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="panel-body" id="panelBody">
+                <div class="loading">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.API_BASE || 'http://localhost:3000/api';
+        let currentTab = 'bookings';
+        let cachedBookings = [];
+        let cachedRooms = [];
+        let cachedContacts = [];
+
+        async function loadStats() {
+            try {
+                const res = await fetch(`${API_BASE}/dashboard/stats`);
+                const stats = await res.json();
+                renderStats(stats);
+                renderChart(stats.bookingsByRoomType || []);
+            } catch (err) {
+                document.getElementById('statsGrid').innerHTML =
+                    '<div class="empty"><i class="fas fa-exclamation-triangle"></i>Backend offline. Start the API server on ' + API_BASE + '</div>';
+            }
+        }
+
+        function renderStats(s) {
+            const grid = document.getElementById('statsGrid');
+            grid.innerHTML = `
+                <div class="stat-card">
+                    <i class="fas fa-calendar"></i>
+                    <h3>Total Bookings</h3>
+                    <div class="value">${s.totalBookings || 0}</div>
+                    <div class="subtitle">All-time</div>
+                </div>
+                <div class="stat-card confirmed">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Confirmed</h3>
+                    <div class="value">${s.confirmedBookings || 0}</div>
+                    <div class="subtitle">Active reservations</div>
+                </div>
+                <div class="stat-card pending">
+                    <i class="fas fa-hourglass-half"></i>
+                    <h3>Pending</h3>
+                    <div class="value">${s.pendingBookings || 0}</div>
+                    <div class="subtitle">Awaiting payment</div>
+                </div>
+                <div class="stat-card revenue">
+                    <i class="fas fa-coins"></i>
+                    <h3>Revenue</h3>
+                    <div class="value">KES ${(s.totalRevenue || 0).toLocaleString()}</div>
+                    <div class="subtitle">Confirmed & paid</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-percentage"></i>
+                    <h3>Occupancy</h3>
+                    <div class="value">${s.occupancyRate || 0}%</div>
+                    <div class="subtitle">${s.occupiedRooms || 0}/${s.totalRooms || 0} rooms</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Total Guests</h3>
+                    <div class="value">${s.totalGuests || 0}</div>
+                    <div class="subtitle">Confirmed bookings</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Messages</h3>
+                    <div class="value">${s.unreadMessages || 0}</div>
+                    <div class="subtitle">Unread</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Rating</h3>
+                    <div class="value">${s.averageRating || '—'}</div>
+                    <div class="subtitle">Guest reviews</div>
+                </div>
+            `;
+        }
+
+        function renderChart(data) {
+            if (!data.length) return;
+            document.getElementById('chartContainer').style.display = 'block';
+            const max = Math.max(...data.map(d => d.count || 0), 1);
+            const chart = document.getElementById('barChart');
+            chart.innerHTML = data.map(d => `
+                <div class="bar-item">
+                    <div class="bar" style="height: ${((d.count / max) * 180)}px">${d.count}</div>
+                    <div class="bar-label">${(d.type || 'unknown').charAt(0).toUpperCase() + (d.type || '').slice(1)}</div>
+                </div>
+            `).join('');
+        }
+
+        async function loadBookings(status = '', search = '') {
+            try {
+                const params = new URLSearchParams();
+                if (status) params.set('status', status);
+                if (search) params.set('search', search);
+                const res = await fetch(`${API_BASE}/bookings?${params}`);
+                cachedBookings = await res.json();
+                renderBookings();
+            } catch (err) {
+                document.getElementById('panelBody').innerHTML =
+                    '<div class="empty"><i class="fas fa-exclamation-triangle"></i>Failed to load bookings. Backend offline?</div>';
+            }
+        }
+
+        function renderBookings() {
+            const body = document.getElementById('panelBody');
+            if (!cachedBookings.length) {
+                body.innerHTML = '<div class="empty"><i class="fas fa-inbox"></i>No bookings found</div>';
+                return;
+            }
+            body.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Guest</th>
+                            <th>Room</th>
+                            <th>Dates</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${cachedBookings.map(b => `
+                            <tr>
+                                <td><code>${b.id}</code></td>
+                                <td>
+                                    <strong>${b.guest_name}</strong><br>
+                                    <small style="color:#6B7280;">${b.guest_email}</small><br>
+                                    <small style="color:#6B7280;">${b.guest_phone}</small>
+                                </td>
+                                <td>
+                                    <strong>${b.room_name}</strong><br>
+                                    <small style="color:#6B7280;">${b.adults} adults · ${b.children} kids</small>
+                                </td>
+                                <td>
+                                    ${b.check_in_date}<br>
+                                    <small style="color:#6B7280;">to ${b.check_out_date} (${b.total_nights}n)</small>
+                                </td>
+                                <td><strong>KES ${(b.total_amount || 0).toLocaleString()}</strong></td>
+                                <td><span class="status-badge status-${b.status}">${b.status}</span></td>
+                                <td><span class="status-badge status-${b.payment_status}">${b.payment_status}</span></td>
+                                <td>
+                                    ${b.status !== 'confirmed' ? `<button class="btn-action btn-confirm" onclick="updateBooking('${b.id}', 'confirmed')">Confirm</button>` : ''}
+                                    ${b.status !== 'cancelled' ? `<button class="btn-action btn-cancel" onclick="cancelBooking('${b.id}')">Cancel</button>` : ''}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function updateBooking(id, status) {
+            if (!confirm(`Change status to "${status}"?`)) return;
+            try {
+                await fetch(`${API_BASE}/bookings/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status })
+                });
+                loadBookings();
+                loadStats();
+            } catch (err) { alert('Update failed: ' + err.message); }
+        }
+
+        async function cancelBooking(id) {
+            if (!confirm('Cancel this booking?')) return;
+            try {
+                await fetch(`${API_BASE}/bookings/${id}`, { method: 'DELETE' });
+                loadBookings();
+                loadStats();
+            } catch (err) { alert('Cancel failed: ' + err.message); }
+        }
+
+        async function loadRooms() {
+            try {
+                const res = await fetch(`${API_BASE}/rooms`);
+                cachedRooms = await res.json();
+                renderRooms();
+            } catch (err) {
+                document.getElementById('panelBody').innerHTML =
+                    '<div class="empty"><i class="fas fa-exclamation-triangle"></i>Failed to load rooms.</div>';
+            }
+        }
+
+        function renderRooms() {
+            const body = document.getElementById('panelBody');
+            body.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>Type</th>
+                            <th>Capacity</th>
+                            <th>Size</th>
+                            <th>View</th>
+                            <th>Price/Night</th>
+                            <th>Rating</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${cachedRooms.map(r => `
+                            <tr>
+                                <td><img src="${r.image_url}" style="width:50px;height:50px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:10px;"><strong>${r.name}</strong></td>
+                                <td><span class="status-badge status-confirmed">${r.type}</span></td>
+                                <td>${r.capacity} pax</td>
+                                <td>${r.size_sqm} sqm</td>
+                                <td>${r.view}</td>
+                                <td><strong>KES ${(r.price_per_night || 0).toLocaleString()}</strong></td>
+                                <td>⭐ ${r.rating}</td>
+                                <td><span class="status-badge status-${r.status === 'available' ? 'confirmed' : 'cancelled'}">${r.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        async function loadContacts() {
+            try {
+                const res = await fetch(`${API_BASE}/contact`);
+                cachedContacts = await res.json();
+                renderContacts();
+            } catch (err) {
+                document.getElementById('panelBody').innerHTML =
+                    '<div class="empty"><i class="fas fa-exclamation-triangle"></i>Failed to load messages.</div>';
+            }
+        }
+
+        function renderContacts() {
+            const body = document.getElementById('panelBody');
+            if (!cachedContacts.length) {
+                body.innerHTML = '<div class="empty"><i class="fas fa-inbox"></i>No messages yet</div>';
+                return;
+            }
+            body.innerHTML = `
+                <table>
+                    <thead>
+                        <tr><th>Date</th><th>From</th><th>Subject</th><th>Message</th><th>Status</th></tr>
+                    </thead>
+                    <tbody>
+                        ${cachedContacts.map(c => `
+                            <tr>
+                                <td>${new Date(c.created_at).toLocaleDateString()}</td>
+                                <td><strong>${c.name}</strong><br><small style="color:#6B7280;">${c.email}</small></td>
+                                <td>${c.subject || 'No subject'}</td>
+                                <td>${c.message.slice(0, 100)}${c.message.length > 100 ? '...' : ''}</td>
+                                <td><span class="status-badge status-${c.status === 'unread' ? 'pending' : 'confirmed'}">${c.status}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentTab = tab.dataset.tab;
+                const filterSelect = document.getElementById('filterSelect');
+                if (currentTab === 'bookings') {
+                    document.getElementById('panelTitle').textContent = 'All Bookings';
+                    filterSelect.style.display = '';
+                    loadBookings();
+                } else if (currentTab === 'rooms') {
+                    document.getElementById('panelTitle').textContent = 'Room Inventory';
+                    filterSelect.style.display = 'none';
+                    loadRooms();
+                } else if (currentTab === 'contacts') {
+                    document.getElementById('panelTitle').textContent = 'Guest Messages';
+                    filterSelect.style.display = 'none';
+                    loadContacts();
+                }
+            });
+        });
+
+        // Search & filter
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                if (currentTab === 'bookings') loadBookings(document.getElementById('filterSelect').value, e.target.value);
+            }, 300);
+        });
+        document.getElementById('filterSelect').addEventListener('change', (e) => {
+            if (currentTab === 'bookings') loadBookings(e.target.value, document.getElementById('searchInput').value);
+        });
+
+        // Auto-refresh every 30 seconds
+        loadStats();
+        loadBookings();
+        setInterval(() => {
+            loadStats();
+            if (currentTab === 'bookings') loadBookings(document.getElementById('filterSelect').value, document.getElementById('searchInput').value);
+        }, 30000);
+    </script>
+</body>
+</html>
