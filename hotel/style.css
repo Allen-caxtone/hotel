@@ -910,3 +910,129 @@ footer p {
         transform: translateX(0px);
     }
 }
+
+/* ============================================
+   ENHANCED STYLES — Backend Integration & M-Pesa
+   ============================================ */
+
+.slider { position: relative; width: 100%; height: 100%; display: block; }
+.slide { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; z-index: 1; }
+.slide.active { opacity: 1; z-index: 2; }
+
+.logo a i { color: var(--accent-color); margin-right: 8px; }
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px; margin-top: 40px; text-align: center;
+}
+.stat-item {
+    background: white; padding: 30px 20px; border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+.stat-item:hover { transform: translateY(-5px); }
+.stat-number {
+    display: block; font-size: 3em; font-weight: bold;
+    color: var(--primary-color); font-family: 'Playfair Display', serif;
+}
+.stat-label {
+    display: block; margin-top: 8px; color: var(--secondary-color);
+    font-size: 0.95em; letter-spacing: 0.5px;
+}
+
+.room-card { position: relative; }
+.room-badge {
+    position: absolute; top: 15px; left: 15px;
+    background: var(--primary-color); color: white;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 0.75em; font-weight: bold; letter-spacing: 1px;
+    text-transform: uppercase; z-index: 5;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.room-badge.premium { background: linear-gradient(135deg, #B8860B, #DAA520); }
+
+.dining-card .meta {
+    display: block; padding: 0 15px 20px 15px;
+    color: var(--primary-color); font-size: 0.85em;
+    font-style: italic; letter-spacing: 0.3px;
+}
+
+.testimonial-card .stars {
+    color: #FFD700; font-size: 1.4em; margin-bottom: 15px; letter-spacing: 3px;
+}
+
+.amenity-item p i { color: var(--primary-color); margin-right: 8px; }
+
+.total-display {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #F8F4EE, #EFE8DD);
+    padding: 20px; border-radius: 8px; margin-top: 10px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.total-display label { margin: 0; font-size: 1em; }
+.total-amount {
+    font-size: 1.8em; font-weight: bold; color: var(--primary-color);
+    font-family: 'Playfair Display', serif;
+}
+
+.booking-form input[type="text"],
+.booking-form input[type="email"],
+.booking-form input[type="tel"] {
+    width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px;
+    font-size: 1em; box-sizing: border-box; font-family: inherit;
+}
+.booking-form input[type="text"]:focus,
+.booking-form input[type="email"]:focus,
+.booking-form input[type="tel"]:focus {
+    border-color: var(--primary-color); outline: none;
+    box-shadow: 0 0 5px rgba(163, 140, 111, 0.5);
+}
+.booking-form input.invalid, .booking-form select.invalid {
+    border-color: #d9534f; background-color: #fef5f5;
+}
+
+.mpesa-modal { background-color: rgba(0,0,0,0.85); }
+.mpesa-modal-content {
+    background: white; padding: 40px; border-radius: 12px;
+    max-width: 480px; width: 90%; text-align: center;
+    animation: zoomIn 0.4s; position: relative;
+}
+.mpesa-header {
+    background: linear-gradient(135deg, #00A651, #007A3D);
+    color: white; padding: 25px; border-radius: 10px;
+    margin: -40px -40px 25px -40px;
+    border-top-left-radius: 12px; border-top-right-radius: 12px;
+}
+.mpesa-header i { font-size: 2.5em; margin-bottom: 10px; display: block; }
+.mpesa-header h3 { color: white; margin: 0; font-size: 1.5em; text-align: center; }
+.mpesa-status { padding: 20px 0; }
+.spinner {
+    width: 60px; height: 60px;
+    border: 5px solid #e8e8e8; border-top: 5px solid #00A651;
+    border-radius: 50%; animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+#mpesaMessage { font-size: 1.1em; color: var(--secondary-color); margin: 15px 0; }
+.mpesa-hint { color: #666; font-size: 0.9em; }
+.mpesa-details {
+    background: #F8F8F8; padding: 20px; border-radius: 8px;
+    margin-top: 20px; text-align: left;
+}
+.mpesa-details p { margin: 8px 0; color: var(--secondary-color); }
+.mpesa-details strong { color: var(--primary-color); }
+
+.confirmation-message strong { display: block; margin-bottom: 4px; font-size: 1.05em; }
+.confirmation-message small { display: block; margin-top: 8px; opacity: 0.85; font-weight: normal; }
+
+footer p i { color: var(--accent-color); }
+.contact-info p .fa-whatsapp { color: #25D366; }
+
+@media (max-width: 768px) {
+    .mpesa-modal-content { padding: 30px 20px; }
+    .mpesa-header { margin: -30px -20px 20px -20px; }
+    .total-display { flex-direction: column; text-align: center; gap: 10px; }
+    .about-stats { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+    .stat-number { font-size: 2.2em; }
+}
