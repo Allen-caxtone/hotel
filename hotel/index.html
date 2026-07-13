@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Grand Lux Hotel - 5-Star Luxury & Comfort</title>
+    <title>The Grand Lux Hotel - 5-Star Luxury & Comfort in Kenya</title>
+    <meta name="description" content="Experience unrivaled luxury at The Grand Lux Hotel. 5-star accommodation, exquisite dining, world-class amenities, and M-Pesa booking.">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://images.pexels.com">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <a href="#home">The Grand Lux Hotel</a>
+                <a href="#home"><i class="fas fa-crown"></i> The Grand Lux Hotel</a>
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
@@ -33,7 +35,7 @@
         <section id="home" class="hero-section">
             <div class="slider">
                 <div class="slide active">
-                    <img src="images/image 1.jpg" alt="Luxurious Hotel Lobby">
+                    <img src="https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Luxurious Hotel Lobby">
                     <div class="hero-content">
                         <h1>Experience Unrivaled Luxury</h1>
                         <p>Your perfect escape awaits at The Grand Lux Hotel.</p>
@@ -41,7 +43,7 @@
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="images/image 2.jpg" alt="Elegant Suite Bedroom">
+                    <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Elegant Suite Bedroom">
                     <div class="hero-content">
                         <h1>Sophisticated Comfort, Exquisite Design</h1>
                         <p>Indulge in spacious rooms and breathtaking views.</p>
@@ -49,7 +51,7 @@
                     </div>
                 </div>
                 <div class="slide">
-                    <img src="https://www.freepik.com/free-photo/popular-resort-amara-dolce-vita-luxury-hotel-with-pools-water-parks-recreational-area-along-sea-coast-turkey-sunset-tekirova-kemer_10136800.htm#fromView=keyword&page=1&position=3&uuid=34987431-51d7-438e-b0d9-46f2b69aa5eb&query=Grand+Hotel/1920x1080/000000/AAAAAA?text=Infinity+Pool+with+View" alt="Infinity Pool with View">
+                    <img src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Infinity Pool with View">
                     <div class="hero-content">
                         <h1>Relax and Rejuvenate</h1>
                         <p>Discover our world-class amenities and serene spa.</p>
@@ -64,10 +66,39 @@
             </div>
         </section>
 
+        <section id="about" class="section-padding bg-light">
+            <div class="container">
+                <h2>Welcome to The Grand Lux</h2>
+                <p class="section-intro">A landmark of Kenyan hospitality, blending timeless elegance with modern innovation. Located in the heart of Nairobi, we offer world-class accommodations and personalized service that defines luxury travel in East Africa.</p>
+                <div class="about-stats">
+                    <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Room Categories</span></div>
+                    <div class="stat-item"><span class="stat-number">4</span><span class="stat-label">Restaurants & Bars</span></div>
+                    <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">Premium Amenities</span></div>
+                    <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">Concierge Service</span></div>
+                </div>
+            </div>
+        </section>
+
         <section id="booking" class="section-padding booking-section">
             <div class="container">
                 <h2>Book Your Stay</h2>
+                <p class="section-intro">Instant confirmation. Pay securely with M-Pesa.</p>
                 <form id="bookingForm" class="booking-form">
+                    <div class="form-group">
+                        <label for="guestName">Full Name:</label>
+                        <input type="text" id="guestName" name="guestName" placeholder="John Doe" required>
+                        <p class="error-message" id="guestNameError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestEmail">Email:</label>
+                        <input type="email" id="guestEmail" name="guestEmail" placeholder="you@example.com" required>
+                        <p class="error-message" id="guestEmailError"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestPhone">M-Pesa Phone (07XXXXXXXX):</label>
+                        <input type="tel" id="guestPhone" name="guestPhone" placeholder="0712345678" pattern="[0-9+]{10,13}" required>
+                        <p class="error-message" id="guestPhoneError"></p>
+                    </div>
                     <div class="form-group">
                         <label for="checkInDate">Check-in Date:</label>
                         <input type="date" id="checkInDate" name="checkInDate" required>
@@ -91,14 +122,18 @@
                         <label for="roomType">Room Type:</label>
                         <select id="roomType" name="roomType" required>
                             <option value="">Select a Room Type</option>
-                            <option value="standard">Standard Room</option>
-                            <option value="deluxe">Deluxe Suite</option>
-                            <option value="executive">Executive Suite</option>
-                            <option value="presidential">Presidential Suite</option>
+                            <option value="standard" data-price="25000">Standard Room — KES 25,000/night</option>
+                            <option value="deluxe" data-price="45000">Deluxe Suite — KES 45,000/night</option>
+                            <option value="executive" data-price="70000">Executive Suite — KES 70,000/night</option>
+                            <option value="presidential" data-price="150000">Presidential Suite — KES 150,000/night</option>
                         </select>
                         <p class="error-message" id="roomTypeError"></p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Check Availability</button>
+                    <div class="form-group total-display">
+                        <label>Total Amount:</label>
+                        <div id="totalAmount" class="total-amount">KES 0</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-mobile-alt"></i> Pay with M-Pesa</button>
                     <div id="bookingConfirmation" class="confirmation-message hidden"></div>
                 </form>
             </div>
@@ -107,42 +142,61 @@
         <section id="rooms" class="section-padding">
             <div class="container">
                 <h2>Our Luxurious Rooms & Suites</h2>
+                <p class="section-intro">From cozy standard rooms to the opulent Presidential Suite, find your perfect retreat.</p>
                 <div class="room-gallery">
                     <article class="room-card">
-                        <img src="https://via.placeholder.com/600x400/D3D3D3/000000?text=Standard+Room" alt="Standard Room">
+                        <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Standard Room">
+                        <div class="room-badge">Popular</div>
                         <h3>Standard Room</h3>
                         <p>Cozy and elegant, perfect for a comfortable stay.</p>
                         <ul>
                             <li><i class="fas fa-bed"></i> King Bed</li>
                             <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
                             <li><i class="fas fa-utensils"></i> Breakfast Included</li>
+                            <li><i class="fas fa-ruler-combined"></i> 32 sqm · City View</li>
                         </ul>
                         <span class="price">From KES 25,000 / Night</span>
-                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                        <a href="#booking" class="btn btn-secondary" data-room-type="standard">Book Now</a>
                     </article>
                     <article class="room-card">
-                        <img src="https://via.placeholder.com/600x400/B0C4DE/000000?text=Deluxe+Suite" alt="Deluxe Suite">
+                        <img src="https://images.pexels.com/photos/271619/pexels-photo-271619.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Deluxe Suite">
                         <h3>Deluxe Suite</h3>
                         <p>Spacious and stylish, with a separate living area.</p>
                         <ul>
                             <li><i class="fas fa-bed"></i> Super King Bed</li>
                             <li><i class="fas fa-couch"></i> Lounge Area</li>
                             <li><i class="fas fa-bath"></i> Marble Bathroom</li>
+                            <li><i class="fas fa-ruler-combined"></i> 48 sqm · Ocean View</li>
                         </ul>
                         <span class="price">From KES 45,000 / Night</span>
-                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                        <a href="#booking" class="btn btn-secondary" data-room-type="deluxe">Book Now</a>
                     </article>
                     <article class="room-card">
-                        <img src="https://via.placeholder.com/600x400/ADD8E6/000000?text=Executive+Suite" alt="Executive Suite">
+                        <img src="https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Executive Suite">
                         <h3>Executive Suite</h3>
                         <p>Panoramic views and exclusive executive lounge access.</p>
                         <ul>
                             <li><i class="fas fa-bed"></i> California King</li>
                             <li><i class="fas fa-mug-hot"></i> Coffee Machine</li>
                             <li><i class="fas fa-user-tie"></i> Executive Perks</li>
+                            <li><i class="fas fa-ruler-combined"></i> 65 sqm · Panoramic</li>
                         </ul>
                         <span class="price">From KES 70,000 / Night</span>
-                        <a href="#booking" class="btn btn-secondary">Book Now</a>
+                        <a href="#booking" class="btn btn-secondary" data-room-type="executive">Book Now</a>
+                    </article>
+                    <article class="room-card">
+                        <img src="https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Presidential Suite">
+                        <div class="room-badge premium">Premium</div>
+                        <h3>Presidential Suite</h3>
+                        <p>The pinnacle of luxury with private butler and 360° views.</p>
+                        <ul>
+                            <li><i class="fas fa-crown"></i> Royal King + Twin Beds</li>
+                            <li><i class="fas fa-concierge-bell"></i> 24/7 Butler Service</li>
+                            <li><i class="fas fa-hot-tub"></i> Private Jacuzzi</li>
+                            <li><i class="fas fa-ruler-combined"></i> 120 sqm · 360° View</li>
+                        </ul>
+                        <span class="price">From KES 150,000 / Night</span>
+                        <a href="#booking" class="btn btn-secondary" data-room-type="presidential">Book Now</a>
                     </article>
                 </div>
             </div>
@@ -154,19 +208,28 @@
                 <p class="section-intro">Savor culinary masterpieces crafted by our award-winning chefs.</p>
                 <div class="dining-options">
                     <article class="dining-card">
-                        <img src="https://via.placeholder.com/600x400/F0E68C/000000?text=Fine+Dining+Restaurant" alt="Fine Dining Restaurant">
+                        <img src="https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800" alt="The Grand Bistro">
                         <h3>The Grand Bistro</h3>
                         <p>A sophisticated ambiance serving contemporary international cuisine.</p>
+                        <span class="meta">6:30 AM - 11:00 PM · Smart Casual</span>
                     </article>
                     <article class="dining-card">
-                        <img src="https://via.placeholder.com/600x400/DDA0DD/000000?text=Rooftop+Bar" alt="Rooftop Bar">
+                        <img src="https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Skyline Lounge">
                         <h3>Skyline Lounge</h3>
                         <p>Enjoy handcrafted cocktails with panoramic city views from our rooftop bar.</p>
+                        <span class="meta">5:00 PM - 1:00 AM · Live Jazz</span>
                     </article>
                     <article class="dining-card">
-                        <img src="https://via.placeholder.com/600x400/98FB98/000000?text=Cafe+Patisserie" alt="Cafe Patisserie">
+                        <img src="https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Patisserie Delights">
                         <h3>Patisserie Delights</h3>
                         <p>Indulge in freshly baked pastries, artisanal coffee, and light snacks.</p>
+                        <span class="meta">7:00 AM - 9:00 PM · Casual</span>
+                    </article>
+                    <article class="dining-card">
+                        <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ocean View Restaurant">
+                        <h3>Ocean View</h3>
+                        <p>Fresh seafood and prime cuts with breathtaking ocean views.</p>
+                        <span class="meta">12:00 PM - 11:00 PM · Formal</span>
                     </article>
                 </div>
             </div>
@@ -177,29 +240,29 @@
                 <h2>World-Class Amenities</h2>
                 <p class="section-intro">Elevate your stay with our premium facilities designed for your comfort and enjoyment.</p>
                 <div class="amenities-grid gallery">
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/87CEFA/000000?text=Spa+and+Wellness">
-                        <img src="https://via.placeholder.com/400x300/87CEFA/000000?text=Spa+and+Wellness" alt="Spa and Wellness Center">
-                        <p>Spa & Wellness Center</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Spa and Wellness">
+                        <p><i class="fas fa-spa"></i> Spa & Wellness Center</p>
                     </div>
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/FFB6C1/000000?text=Fitness+Center">
-                        <img src="https://via.placeholder.com/400x300/FFB6C1/000000?text=Fitness+Center" alt="State-of-the-art Fitness Center">
-                        <p>Fitness Center</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/1954524/pexels-photo-1954524.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fitness Center">
+                        <p><i class="fas fa-dumbbell"></i> Fitness Center</p>
                     </div>
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/90EE90/000000?text=Swimming+Pool">
-                        <img src="https://via.placeholder.com/400x300/90EE90/000000?text=Swimming+Pool" alt="Outdoor Swimming Pool">
-                        <p>Outdoor Swimming Pool</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Swimming Pool">
+                        <p><i class="fas fa-swimming-pool"></i> Outdoor Swimming Pool</p>
                     </div>
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/DDA0DD/000000?text=Conference+Room">
-                        <img src="https://via.placeholder.com/400x300/DDA0DD/000000?text=Conference+Room" alt="Modern Conference Facilities">
-                        <p>Conference Facilities</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Conference">
+                        <p><i class="fas fa-briefcase"></i> Conference Facilities</p>
                     </div>
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/F4A460/000000?text=Kids+Club">
-                        <img src="https://via.placeholder.com/400x300/F4A460/000000?text=Kids+Club" alt="Kids Club">
-                        <p>Kids Club</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kids Club">
+                        <p><i class="fas fa-child"></i> Kids Club</p>
                     </div>
-                    <div class="amenity-item gallery-item" data-src="https://via.placeholder.com/1200x800/F0F8FF/000000?text=Concierge+Service">
-                        <img src="https://via.placeholder.com/400x300/F0F8FF/000000?text=Concierge+Service" alt="Dedicated Concierge Service">
-                        <p>24/7 Concierge Service</p>
+                    <div class="amenity-item gallery-item" data-src="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1600">
+                        <img src="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Concierge">
+                        <p><i class="fas fa-concierge-bell"></i> 24/7 Concierge Service</p>
                     </div>
                 </div>
             </div>
@@ -210,22 +273,31 @@
                 <h2>What Our Guests Say</h2>
                 <div class="testimonials-slider">
                     <div class="testimonial-card active">
+                        <div class="stars">★★★★★</div>
                         <p class="quote">"Absolutely magnificent! The service was impeccable, and the room was beyond luxurious. A truly unforgettable experience."</p>
-                        <p class="author">- Sarah L., USA</p>
+                        <p class="author">— Sarah L., USA · Deluxe Suite</p>
                     </div>
                     <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
                         <p class="quote">"From the stunning lobby to the exquisite dining, The Grand Lux exceeded all expectations. Highly recommend!"</p>
-                        <p class="author">- David K., UK</p>
+                        <p class="author">— David K., UK · Executive Suite</p>
                     </div>
                     <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
                         <p class="quote">"Every detail was perfect. The staff were incredibly attentive, and the amenities made our stay so relaxing. We will be back!"</p>
-                        <p class="author">- Aisha M., Kenya</p>
+                        <p class="author">— Aisha M., Kenya · Standard Room</p>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="quote">"The Presidential Suite is worth every shilling. The butler service and private dining made our anniversary unforgettable."</p>
+                        <p class="author">— Priya S., India · Presidential Suite</p>
                     </div>
                 </div>
                 <div class="testimonial-nav">
                     <span class="dot active" data-testimonial="0"></span>
                     <span class="dot" data-testimonial="1"></span>
                     <span class="dot" data-testimonial="2"></span>
+                    <span class="dot" data-testimonial="3"></span>
                 </div>
             </div>
         </section>
@@ -236,9 +308,10 @@
                 <div class="contact-grid">
                     <div class="contact-info">
                         <h3>Reach Out</h3>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Grand City, GL 12345</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Luxury Avenue, Nairobi, Kenya</p>
                         <p><i class="fas fa-phone-alt"></i> +254 714 564 789</p>
                         <p><i class="fas fa-envelope"></i> info@grandluxhotel.com</p>
+                        <p><i class="fab fa-whatsapp"></i> WhatsApp: +254 714 564 789</p>
                         <div class="social-links">
                             <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -248,7 +321,7 @@
                     </div>
                     <div class="newsletter-form">
                         <h3>Subscribe to our Newsletter</h3>
-                        <p>Stay updated with our latest offers and news.</p>
+                        <p>Get exclusive offers, seasonal packages, and news from The Grand Lux.</p>
                         <form id="newsletterForm">
                             <input type="email" placeholder="Your Email Address" required aria-label="Newsletter email">
                             <button type="submit" class="btn btn-primary">Subscribe</button>
@@ -262,11 +335,13 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 The Grand Lux Hotel. All rights reserved.</p>
+            <p><i class="fas fa-crown"></i> The Grand Lux Hotel — Where Luxury Meets Legend.</p>
+            <p>&copy; 2026 The Grand Lux Hotel. All rights reserved. | Payments powered by M-Pesa</p>
             <ul class="footer-links">
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="#">Sitemap</a></li>
+                <li><a href="admin.html">Admin</a></li>
             </ul>
         </div>
     </footer>
@@ -274,6 +349,27 @@
     <div id="imageModal" class="modal">
         <span class="close-button">&times;</span>
         <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- M-Pesa Payment Modal -->
+    <div id="mpesaModal" class="modal mpesa-modal">
+        <div class="mpesa-modal-content">
+            <span class="close-button" id="mpesaClose">&times;</span>
+            <div class="mpesa-header">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>M-Pesa Payment</h3>
+            </div>
+            <div id="mpesaStatus" class="mpesa-status">
+                <div class="spinner"></div>
+                <p id="mpesaMessage">Sending payment request to your phone...</p>
+                <p class="mpesa-hint">Check your phone and enter your M-Pesa PIN to complete payment</p>
+            </div>
+            <div id="mpesaDetails" class="mpesa-details hidden">
+                <p><strong>Booking ID:</strong> <span id="modalBookingId"></span></p>
+                <p><strong>Amount:</strong> <span id="modalAmount"></span></p>
+                <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
