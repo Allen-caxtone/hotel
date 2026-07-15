@@ -207,27 +207,6 @@ nav {
     overflow: hidden;
 }
 
-.slider {
-    display: flex;
-    width: 300%; /* For 3 slides */
-    height: 100%;
-    transition: transform 1s ease-in-out;
-}
-
-.slide {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-shrink: 0; /* Prevent slides from shrinking */
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(60%); /* Darken image for text readability */
-}
-
 .hero-content {
     position: absolute;
     top: 50%;
@@ -251,6 +230,13 @@ nav {
     font-size: 1.5em;
     margin-bottom: 30px;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(60%); /* Darken image for text readability */
 }
 
 .slider-nav {
